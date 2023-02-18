@@ -40,7 +40,7 @@ def get_value():
 root = Tk()
 root.title("Расчет каллорий фруктов")
 root.geometry("700x200")
-root.option_add('*TCombobox*Listbox.font', "Calibri")
+root.option_add('*TCombobox*Listbox.font', "Calibri")    # *TCombobox*Listbox.font - опция окна для шрифта Combobox
 root.resizable(False, False)
 
 fruits = Combobox(root, values=("", "Яблоки", "Бананы", "Персики", "Киви"), state="readonly", font=("Calibri", 20))
