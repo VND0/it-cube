@@ -5,7 +5,7 @@ root = Tk()
 root.title("Добавление текста")
 root.resizable(False, False)
 root.option_add('*TCombobox*Listbox.font', "Helvetica")
-root.geometry("599x800")
+root.geometry("599x798")
 
 
 def add_text():
