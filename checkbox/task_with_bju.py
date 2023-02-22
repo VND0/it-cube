@@ -10,6 +10,26 @@ error_text = """Не выбран фрукт или в поле ввода ма�
 либо масса отрицательная."""
 
 
+def get_real_mass():
+    mass_to_work_raw = mass.get()
+    mass_to_work = ""
+    if not (mass_to_work_raw.isdigit()):
+        final = ""
+        for i in mass_to_work_raw:
+            if i.isdigit():
+                final += i
+            else:
+                break
+        mass_to_work = float(final)
+    else:
+        mass_to_work = float(mass_to_work_raw)
+    return float(mass_to_work)
+
+def get_info():
+    fruit = fruits.get()
+    mass = get_real_mass()
+
+
 def get_value():
     # Если галочки нет
     if not (bool(status.get())):
@@ -17,23 +37,9 @@ def get_value():
         result.delete(0, END)
         try:
             per_1_g = fruit_call[fruits.get()]
-
-            mass_to_work_raw = mass.get()
-            mass_to_work = ""
-            if not(mass_to_work_raw.isdigit()):
-                final = ""
-                for i in mass_to_work_raw:
-                    if i.isdigit():
-                        final += i
-                    else:
-                        break
-                mass_to_work = float(final)
-            else:
-                mass_to_work = float(mass_to_work_raw)
-
-            if mass_to_work < 0:
+            if get_real_mass() < 0:
                 0/0
-            result.insert(0, round(per_1_g * mass_to_work, 2))
+            result.insert(0, round(per_1_g * get_real_mass(), 2))
         except:
             messagebox.showerror("Ошибка ввода данных", error_text)
         result.configure(state=DISABLED)
@@ -44,24 +50,10 @@ def get_value():
         work_with_percents = 0
         try:
             per_1_g = fruit_call[fruits.get()]
-
-            mass_to_work_raw = mass.get()
-            mass_to_work = ""
-            if not(mass_to_work_raw.isdigit()):
-                final = ""
-                for i in mass_to_work_raw:
-                    if i.isdigit():
-                        final += i
-                    else:
-                        break
-                mass_to_work = float(final)
-            else:
-                mass_to_work = float(mass_to_work_raw)
-
-            if mass_to_work < 0:
+            if get_real_mass() < 0:
                 0/0
 
-            work_with_percents = round(per_1_g * mass_to_work, 2)
+            work_with_percents = round(per_1_g * get_real_mass(), 2)
             normal_for_adult = 2500
             result.insert(0, round(work_with_percents / normal_for_adult * 100, 2))
         except:
@@ -93,6 +85,9 @@ result = Entry(root, width=15, font=("Calibri", 20))
 status = IntVar()
 status.set(0)
 box = Checkbutton(root, text="Вычислить процент от суточной нормы", variable=status, font=("Calibri", 15))
+
+# Белки, жиры, углеводы
+add_info = Text(root, height=4, weight=10, font=("Calibri", 20))
 
 # расположение в окне
 fruits.grid(row=0, column=0, padx=5, pady=5, sticky="w")
