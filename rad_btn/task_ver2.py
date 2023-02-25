@@ -9,6 +9,9 @@ tit = "Ошибка данных"
 
 
 def print_to_text():
+    field.configure(state=NORMAL)
+    field.delete(0.0, END)
+
     width, height = None, None
     if int(variant.get()):
         width = int(variant.get())
@@ -27,8 +30,6 @@ def print_to_text():
         messagebox.showerror(tit, more_than_fifteen)
         0/0
 
-    field.configure(state=NORMAL)
-    field.delete(0.0, END)
     for i in range(height):
         if i == 0 or i == height-1:
             field.insert(END, "#" * width + "\n")
